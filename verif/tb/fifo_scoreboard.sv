@@ -1,16 +1,6 @@
 // =============================================================================
 // File        : fifo_scoreboard.sv
 // Description : Scoreboard — the "checker" of the testbench.
-//
-//               How it works:
-//                 1. Write checker receives write transactions from the monitor
-//                    and pushes the written data onto a reference queue.
-//                 2. Read checker receives read transactions from the monitor,
-//                    pops the expected data from the queue, and compares it
-//                    with the actual data_out from the DUT.
-//                 3. If they match → PASS. If not → FAIL.
-//
-//               The reference queue acts as a "golden model" of the FIFO.
 // =============================================================================
 
 `ifndef FIFO_SCOREBOARD_SIMPLE_SV

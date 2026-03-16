@@ -2,10 +2,6 @@
 // File        : fifo_transaction.sv
 // Description : Transaction class — the "data packet" that flows between
 //               testbench components (driver -> monitor -> scoreboard).
-//
-//               Think of it as a form that carries:
-//                 - What we want to do (write? read? what data?)
-//                 - What we observed (flags, read data, timestamp)
 // =============================================================================
 
 `ifndef FIFO_TRANSACTION_SIMPLE_SV

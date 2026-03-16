@@ -6,11 +6,6 @@
 //               Two independent always-running tasks:
 //                 monitor_write() — watches write-domain (wrclk)
 //                 monitor_read()  — watches read-domain  (rdclk)
-//
-//               KEY DETAIL: The DUT has a REGISTERED data_out, meaning:
-//                 Cycle N  : rd_en=1 & fifo_empty=0  → valid read request
-//                 Cycle N+1: data_out has the read data ← capture HERE
-//               We use a flag (rd_was_valid) to handle this 1-cycle delay.
 // =============================================================================
 
 `ifndef FIFO_MONITOR_SIMPLE_SV

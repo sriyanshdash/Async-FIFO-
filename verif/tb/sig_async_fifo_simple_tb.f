@@ -8,7 +8,7 @@
 //               would cause double-compilation and $unit scope errors.
 //
 // Usage       : xrun -f $SIG_FIFO_HOME/rtl/sig_async_fifo_flst.f \
-//                    -f $SIG_FIFO_HOME/verif/tb_simple/sig_async_fifo_simple_tb.f
+//                    -f $SIG_FIFO_HOME/verif/tb/sig_async_fifo_simple_tb.f
 // =============================================================================
 
 // ---- TB Top (includes all other TB files) ----

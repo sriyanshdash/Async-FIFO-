@@ -1,0 +1,819 @@
+xrun: 24.09-s001: (c) Copyright 1995-2024 Cadence Design Systems, Inc.
+TOOL:	xrun	24.09-s001: Started on Mar 17, 2026 at 11:50:14 IST
+xrun
+	+define+DUMP_ON
+	+define+CADENCE
+	-incdir /scratch/users/sdash/Async-FIFO-E/verif/tb/
+	-f /scratch/users/sdash/Async-FIFO-E/rtl/sig_async_fifo_flst.f
+		/scratch/users/sdash/Async-FIFO-E/rtl/synchronizer.sv
+		/scratch/users/sdash/Async-FIFO-E/rtl/fifo_memory.sv
+		/scratch/users/sdash/Async-FIFO-E/rtl/wrptr_handler.sv
+		/scratch/users/sdash/Async-FIFO-E/rtl/rdptr_handler.sv
+		/scratch/users/sdash/Async-FIFO-E/rtl/fifo_top.sv
+	-f /scratch/users/sdash/Async-FIFO-E/verif/tb/sig_async_fifo_simple_tb.f
+		/scratch/users/sdash/Async-FIFO-E/verif/tb/fifo_tb_top.sv
+	-svseed 1234
+	+nowarn_AAMNSD
+	+access+rw
+	-disable_sem2009
+	+sv
+	+timescale+1ns/1ps
+	+TEST_NAME=all
+
+   User defined plus("+") options:
+	+timescale+1ns/1ps
+	+TEST_NAME=all
+
+file: /scratch/users/sdash/Async-FIFO-E/rtl/synchronizer.sv
+	module worklib.synchronizer:sv
+		errors: 0, warnings: 0
+file: /scratch/users/sdash/Async-FIFO-E/rtl/fifo_memory.sv
+	module worklib.fifo_mem:sv
+		errors: 0, warnings: 0
+file: /scratch/users/sdash/Async-FIFO-E/rtl/wrptr_handler.sv
+	module worklib.wptr_handler:sv
+		errors: 0, warnings: 0
+file: /scratch/users/sdash/Async-FIFO-E/rtl/rdptr_handler.sv
+	module worklib.rptr_handler:sv
+		errors: 0, warnings: 0
+file: /scratch/users/sdash/Async-FIFO-E/rtl/fifo_top.sv
+	module worklib.asynchronous_fifo:sv
+		errors: 0, warnings: 0
+file: /scratch/users/sdash/Async-FIFO-E/verif/tb/fifo_tb_top.sv
+	interface worklib.fifo_if:sv
+		errors: 0, warnings: 0
+        int num_pass = 0;
+                     |
+xmvlog: *W,VARIST (/scratch/users/sdash/Async-FIFO-E/verif/tb/fifo_tb_top.sv,349|21): Local static variable with initializer requires 'static' keyword.
+        int num_fail = 0;
+                     |
+xmvlog: *W,VARIST (/scratch/users/sdash/Async-FIFO-E/verif/tb/fifo_tb_top.sv,350|21): Local static variable with initializer requires 'static' keyword.
+	module worklib.fifo_tb_top:sv
+		errors: 0, warnings: 2
+		Caching library 'worklib' ....... Done
+	Elaborating the design hierarchy:
+	Top level design units:
+		$unit_0x4f7db9ae
+		fifo_tb_top
+	Building instance overlay tables: .................... Done
+	Generating native compiled code:
+		worklib.fifo_mem:sv <0x45d6c59f>
+			streams:   4, words:  1441
+		worklib.rptr_handler:sv <0x38e6f862>
+			streams:   8, words:  1843
+		worklib.wptr_handler:sv <0x060cc32c>
+			streams:   8, words:  1871
+		worklib.synchronizer:sv <0x351479a8>
+			streams:   3, words:   700
+		worklib.asynchronous_fifo:sv <0x51acef2c>
+			streams:  17, words:  2788
+		worklib.fifo_tb_top:sv <0x7c83fae4>
+			streams:  28, words: 46654
+		worklib.\$unit_0x4f7db9ae :compilation_unit <0x631dbe0c>
+			streams:   6, words:  5091
+		worklib.\$unit_0x4f7db9ae :compilation_unit <0x339e3626>
+			streams:   6, words:  7709
+		worklib.\$unit_0x4f7db9ae :compilation_unit <0x77b41084>
+			streams:  10, words: 10898
+		worklib.\$unit_0x4f7db9ae :compilation_unit <0x54d7f57e>
+			streams:   6, words: 10908
+		worklib.\$unit_0x4f7db9ae :compilation_unit <0x4c65a225>
+			streams:   6, words:  4835
+		worklib.\$unit_0x4f7db9ae :compilation_unit <0x16f169c6>
+			streams:   6, words: 26288
+		worklib.\$unit_0x4f7db9ae :compilation_unit <0x430a97a9>
+			streams:   6, words: 44151
+		worklib.\$unit_0x4f7db9ae :compilation_unit <0x34dd799a>
+			streams:   8, words: 19503
+		worklib.\$unit_0x4f7db9ae :compilation_unit <0x7c902be5>
+			streams:  20, words: 33268
+		worklib.\$unit_0x4f7db9ae :compilation_unit <0x5b5a356a>
+			streams:  12, words: 10997
+		worklib.\$unit_0x4f7db9ae :compilation_unit <0x1fe2e379>
+			streams:  12, words: 35776
+		worklib.\$unit_0x4f7db9ae :compilation_unit <0x498382c8>
+			streams:  12, words: 12029
+		worklib.\$unit_0x4f7db9ae :compilation_unit <0x55606c2b>
+			streams:  15, words: 18123
+		worklib.\$unit_0x4f7db9ae :compilation_unit <0x321ff7c0>
+			streams:   7, words:  1796
+		worklib.\$unit_0x4f7db9ae :compilation_unit <0x6a30b4fa>
+			streams:   0, words:     0
+	Building instance specific data structures.
+	Loading native compiled code:     .................... Done
+	Design hierarchy summary:
+		                     Instances  Unique
+		Modules:                     7       6
+		Interfaces:                  1       1
+		Registers:                 161     193
+		Scalar wires:               18       -
+		Vectored wires:             29       -
+		Always blocks:              10       9
+		Initial blocks:              9       9
+		Parallel blocks:             9       9
+		Cont. assignments:           6       6
+		Pseudo assignments:         27       -
+		Compilation units:           1       1
+		SV Class declarations:      15      15
+		SV Class specializations:   15      15
+		Process Clocks:              8       4
+		Simulation timescale:      1ps
+	Writing initial simulation snapshot: worklib.fifo_tb_top:sv
+Loading snapshot worklib.fifo_tb_top:sv .................... Done
+SVSEED set from command line: 1234
+xcelium> source /tools/cadence/Products/XCELIUM2409/tools/xcelium/files/xmsimrc
+xcelium> run
+
+  ########################################################################
+    ASYNC FIFO - TESTBENCH
+    WIDTH=64  DEPTH=8
+  ########################################################################
+  Running 9 test(s)
+
+  +----------------------------------------------------------------------+
+  |  START: test_basic_rw                                               |
+  +----------------------------------------------------------------------+
+
+  --- Write 8 random values, read all back ---
+[SCB] PASS #1 @ 176000: Data=0x927bd478a95a793a
+[SCB] PASS #2 @ 189000: Data=0x0c4e5da61fb309f6
+[SCB] PASS #3 @ 202000: Data=0x38d6ca22cda0b1fb
+[SCB] PASS #4 @ 215000: Data=0x7c7f7a038e87797c
+[SCB] PASS #5 @ 228000: Data=0x53ddc35950925519
+[SCB] PASS #6 @ 241000: Data=0x9f8b3810b0bd5010
+[SCB] PASS #7 @ 254000: Data=0xe105c0b1604f819d
+[SCB] PASS #8 @ 267000: Data=0x95903472266fd678
+[WARN] wait_drain timed out after 5000 ns
+  --- Single entry write and read ---
+[SCB] PASS #9 @ 5168000: Data=0xdeadbeefcafebabe
+  --- Alternating write-read (20 pairs) ---
+[SCB] PASS #10 @ 5623000: Data=0xc17832bf35fb0a02
+[SCB] PASS #11 @ 6065000: Data=0xda6039285e568adf
+[SCB] PASS #12 @ 6520000: Data=0x304031527ebcf359
+[SCB] PASS #13 @ 6975000: Data=0x00a59191abb091af
+[SCB] PASS #14 @ 7404000: Data=0xdfe3b23954c7d517
+[SCB] PASS #15 @ 7846000: Data=0xcddfac8f82e7c48d
+[SCB] PASS #16 @ 8301000: Data=0xf56c9fb7d235b3d9
+[SCB] PASS #17 @ 8756000: Data=0xec581d8faded3e72
+[SCB] PASS #18 @ 9185000: Data=0x2c6fca0e6584496e
+[SCB] PASS #19 @ 9640000: Data=0xbb68fdba47d1d2bb
+[SCB] PASS #20 @ 10095000: Data=0x55d0efe9f2264cbc
+[SCB] PASS #21 @ 10524000: Data=0xccc066dd26f4ed5b
+[SCB] PASS #22 @ 10966000: Data=0x200a056103942fa9
+[SCB] PASS #23 @ 11421000: Data=0x8abb1c3f176b29da
+[SCB] PASS #24 @ 11876000: Data=0xea9ad030c79262ab
+[SCB] PASS #25 @ 12305000: Data=0xec821cb2a815d384
+[SCB] PASS #26 @ 12760000: Data=0x97b346274b431287
+[SCB] PASS #27 @ 13215000: Data=0x4eb70bcc1ad8dd9f
+[SCB] PASS #28 @ 13644000: Data=0x895ccad6addb0238
+[SCB] PASS #29 @ 14086000: Data=0x6e8684bbe576f00a
+
+  ==========================================================================
+    SCOREBOARD REPORT  test_basic_rw
+  ==========================================================================
+    Writes seen   : 29
+    Reads seen    : 29
+    Queue residual: 0  (should be 0)
+    PASSED        : 29
+    FAILED        : 0
+  --------------------------------------------------------------------------
+    RESULT >> ** PASSED **
+  ==========================================================================
+  +----------------------------------------------------------------------+
+  |  DONE:  test_basic_rw                                        [PASS]  |
+  +----------------------------------------------------------------------+
+
+  +----------------------------------------------------------------------+
+  |  START: test_fill_drain_wrap                                        |
+  +----------------------------------------------------------------------+
+
+  --- Fill to full, drain to empty ---
+[WARN] wait_drain timed out after 5000 ns
+  [FLAG] OK:   fifo_full = 1 @ 19566000
+[SCB] PASS #1 @ 19598000: Data=0xc881be9e2710ad80
+[SCB] PASS #2 @ 19611000: Data=0x8a0a55b6f4671088
+[SCB] PASS #3 @ 19624000: Data=0x04d46905cfed5f65
+[SCB] PASS #4 @ 19637000: Data=0xa82fdb2eab4689e7
+[SCB] PASS #5 @ 19650000: Data=0x03e1d03cda219ea9
+[SCB] PASS #6 @ 19663000: Data=0x3132798da7ecd1db
+[SCB] PASS #7 @ 19676000: Data=0xd3613a9e94acd06b
+[SCB] PASS #8 @ 19689000: Data=0xb214de05e1849730
+[WARN] wait_drain timed out after 5000 ns
+  [FLAG] OK:   fifo_empty = 1 @ 24566000
+  --- 3x fill-drain cycles (pointer wrap) ---
+    Cycle 0
+[SCB] PASS #9 @ 24668000: Data=0x583e6a4f7156622e
+[SCB] PASS #10 @ 24681000: Data=0x533228793a705551
+[SCB] PASS #11 @ 24694000: Data=0x4db9d6158b9024b3
+[SCB] PASS #12 @ 24707000: Data=0x7383334862bd2ae3
+[SCB] PASS #13 @ 24720000: Data=0x8bf5454e3d8b90ab
+[SCB] PASS #14 @ 24733000: Data=0xd65b0433eac6f421
+[SCB] PASS #15 @ 24746000: Data=0x39429139e34e016c
+[SCB] PASS #16 @ 24759000: Data=0xfd3f061d348a6276
+[WARN] wait_drain timed out after 5000 ns
+    Cycle 1
+[SCB] PASS #17 @ 29673000: Data=0x64b3bb29d01ac015
+[SCB] PASS #18 @ 29686000: Data=0xb71a65cb09bae0a5
+[SCB] PASS #19 @ 29699000: Data=0x8903b43deb596b22
+[SCB] PASS #20 @ 29712000: Data=0xf6f6873e863ca0cd
+[SCB] PASS #21 @ 29725000: Data=0xe3fdd289f59b63a5
+[SCB] PASS #22 @ 29738000: Data=0xfda8bb457288a1b8
+[SCB] PASS #23 @ 29751000: Data=0x106268f184ec60d3
+[SCB] PASS #24 @ 29764000: Data=0x200b42786f4f6a60
+[WARN] wait_drain timed out after 5000 ns
+    Cycle 2
+[SCB] PASS #25 @ 34665000: Data=0x75d84853679854fd
+[SCB] PASS #26 @ 34678000: Data=0x553057f616e9aa3c
+[SCB] PASS #27 @ 34691000: Data=0xc2ebab28ce5b6bf4
+[SCB] PASS #28 @ 34704000: Data=0xd949a331ae85680e
+[SCB] PASS #29 @ 34717000: Data=0xf8155a930e522ab3
+[SCB] PASS #30 @ 34730000: Data=0xef6b4523ff5e2e1e
+[SCB] PASS #31 @ 34743000: Data=0xd5f8f3707a8afa9e
+[SCB] PASS #32 @ 34756000: Data=0xa6dac4801e9e8189
+[WARN] wait_drain timed out after 5000 ns
+  --- Depth boundary interleave ---
+[SCB] PASS #33 @ 39670000: Data=0x8ae30b6a07bb5b22
+[WARN] wait_drain timed out after 5000 ns
+[WARN] wait_drain timed out after 5000 ns
+  [FLAG] OK:   fifo_full = 1 @ 49566000
+[SCB] PASS #34 @ 49602000: Data=0xdc3c8672909f4833
+[SCB] PASS #35 @ 49615000: Data=0x551991d0024d0b17
+[SCB] PASS #36 @ 49628000: Data=0x365499f197aba6ba
+[SCB] PASS #37 @ 49641000: Data=0xae7c4daa8808ab9d
+[SCB] PASS #38 @ 49654000: Data=0x9ff665dc12110ca9
+[SCB] PASS #39 @ 49667000: Data=0x13469b6dae41959e
+[SCB] PASS #40 @ 49680000: Data=0x823eee45aeafb194
+[SCB] PASS #41 @ 49693000: Data=0x30e4967ff00ac9d0
+[WARN] wait_drain timed out after 5000 ns
+
+  ==========================================================================
+    SCOREBOARD REPORT  test_fill_drain_wrap
+  ==========================================================================
+    Writes seen   : 41
+    Reads seen    : 41
+    Queue residual: 0  (should be 0)
+    PASSED        : 41
+    FAILED        : 0
+  --------------------------------------------------------------------------
+    RESULT >> ** PASSED **
+  ==========================================================================
+  +----------------------------------------------------------------------+
+  |  DONE:  test_fill_drain_wrap                                 [PASS]  |
+  +----------------------------------------------------------------------+
+
+  +----------------------------------------------------------------------+
+  |  START: test_burst_streaming                                        |
+  +----------------------------------------------------------------------+
+
+  --- Burst write 8, then burst read ---
+[WARN] wait_drain timed out after 5000 ns
+[SCB] PASS #1 @ 59729000: Data=0x6338c89d831fc227
+[SCB] PASS #2 @ 59742000: Data=0x49afdda5da42f78a
+[SCB] PASS #3 @ 59755000: Data=0x1979b2d1aa52f187
+[SCB] PASS #4 @ 59768000: Data=0x93fb60c1359515e0
+[SCB] PASS #5 @ 59781000: Data=0x8b4ab1d18d8f01f0
+[SCB] PASS #6 @ 59794000: Data=0x04711347051bed5e
+[SCB] PASS #7 @ 59807000: Data=0x2a75d3b32ba2501e
+[SCB] PASS #8 @ 59820000: Data=0x2601aaaca114e32b
+[WARN] wait_drain timed out after 5000 ns
+  --- Simultaneous writes and reads ---
+[WARN] wait_drain timed out after 5000 ns
+[SCB] PASS #9 @ 69726000: Data=0x0d0d24e86fb78815
+[SCB] PASS #10 @ 69739000: Data=0x52586ceefad80cd4
+[SCB] PASS #11 @ 69752000: Data=0x3910384eaaf66d4a
+[SCB] PASS #12 @ 69765000: Data=0xcc2794cc137b3b46
+[SCB] PASS #13 @ 69778000: Data=0xf1088e7c51684065
+[SCB] PASS #14 @ 69791000: Data=0x97b023dd3027a5c8
+[SCB] PASS #15 @ 69804000: Data=0xa0f5efcaad8faa60
+[SCB] PASS #16 @ 69817000: Data=0x91680e39d5393499
+[SCB] PASS #17 @ 69830000: Data=0xf81d7bd64f9083e1
+[SCB] PASS #18 @ 69843000: Data=0xe0731570b3e71696
+[SCB] PASS #19 @ 69856000: Data=0xe244cebfd77d4745
+[SCB] PASS #20 @ 69869000: Data=0xfc251c68847fbaf6
+[SCB] PASS #21 @ 69882000: Data=0x48184987d78bb3c3
+[SCB] PASS #22 @ 69895000: Data=0x36929b12064ff0a2
+[SCB] PASS #23 @ 69908000: Data=0x893851bfa81bcde6
+[SCB] PASS #24 @ 69921000: Data=0x3a8ed9f3bbc089ce
+[SCB] PASS #25 @ 69934000: Data=0xb4b2764e6770de81
+[SCB] PASS #26 @ 69947000: Data=0x1407775784f7bda1
+[SCB] PASS #27 @ 69960000: Data=0xf2c568c627b2e180
+[SCB] PASS #28 @ 69973000: Data=0x108cd1066892c88c
+[SCB] PASS #29 @ 69986000: Data=0xd345d82696d49baf
+[SCB] PASS #30 @ 69999000: Data=0x736dea38ff2ae4a0
+[SCB] PASS #31 @ 70012000: Data=0x369c8ec26558f4f7
+[WARN] wait_drain timed out after 5000 ns
+  --- Continuous streaming (100 writes, 100 reads) ---
+[WARN] wait_drain timed out after 5000 ns
+[SCB] PASS #32 @ 79723000: Data=0x7a2f820ecc2b8256
+[SCB] PASS #33 @ 79736000: Data=0x252d630840a186e0
+[SCB] PASS #34 @ 79749000: Data=0xd7a8d137070ce15a
+[SCB] PASS #35 @ 79762000: Data=0xd1bcdd1e2dd6c9e3
+[SCB] PASS #36 @ 79775000: Data=0x2b316882a4c77b85
+[SCB] PASS #37 @ 79788000: Data=0x4e5ae8c91d872e6d
+[SCB] PASS #38 @ 79801000: Data=0xf251ab807013cfe4
+[SCB] PASS #39 @ 79814000: Data=0xc671b505d66e4b14
+[SCB] PASS #40 @ 79827000: Data=0xe2d0d8d58285a4b5
+[SCB] PASS #41 @ 79840000: Data=0xd04c6162bc981cf5
+[SCB] PASS #42 @ 79853000: Data=0x7a0818dde0c2303b
+[SCB] PASS #43 @ 79866000: Data=0x01434e27dba2311a
+[SCB] PASS #44 @ 79879000: Data=0xb45692281c089fd4
+[SCB] PASS #45 @ 79892000: Data=0x551018b2733c5241
+[SCB] PASS #46 @ 79905000: Data=0x09a93ef00d960d41
+[SCB] PASS #47 @ 79918000: Data=0x45b3fbd6a073642c
+[SCB] PASS #48 @ 79931000: Data=0xbe056d2e70cb790d
+[SCB] PASS #49 @ 79944000: Data=0x1fff6da25fd4aa6d
+[SCB] PASS #50 @ 79957000: Data=0x3e4079d360eedf7c
+[SCB] PASS #51 @ 79970000: Data=0x2f3a4783c133740f
+[SCB] PASS #52 @ 79983000: Data=0x8c912b57927bf0d5
+[SCB] PASS #53 @ 79996000: Data=0x5c5e6296175d1599
+[SCB] PASS #54 @ 80009000: Data=0xc95ca34ade340f91
+[SCB] PASS #55 @ 80022000: Data=0xf2fd1345f3085806
+[SCB] PASS #56 @ 80035000: Data=0x966d9198ea77b5c7
+[SCB] PASS #57 @ 80048000: Data=0x791a0a5cf659041f
+[SCB] PASS #58 @ 80061000: Data=0xb8697f848f76f9eb
+[SCB] PASS #59 @ 80074000: Data=0xf32ba176bdc50a55
+[SCB] PASS #60 @ 80087000: Data=0xf1174a3a7f509c29
+[SCB] PASS #61 @ 80100000: Data=0xcd1ec7241610907e
+[SCB] PASS #62 @ 80113000: Data=0x44dc4cc6a157963c
+[SCB] PASS #63 @ 80126000: Data=0x7f1876c64c5a0c35
+[SCB] PASS #64 @ 80139000: Data=0x9bc19a974259341b
+[SCB] PASS #65 @ 80152000: Data=0x6c48c89dec5f0fba
+[SCB] PASS #66 @ 80165000: Data=0x427d081c6e9c5896
+[SCB] PASS #67 @ 80178000: Data=0x0e82c2fd7411a9b7
+[SCB] PASS #68 @ 80191000: Data=0x33ebf7c490984267
+[SCB] PASS #69 @ 80204000: Data=0xce6af65d3fd5382a
+[SCB] PASS #70 @ 80217000: Data=0xd2af3da26323fb2a
+[SCB] PASS #71 @ 80230000: Data=0x6059b3ee75135ecc
+[SCB] PASS #72 @ 80243000: Data=0x22b424e4df9709ca
+[SCB] PASS #73 @ 80256000: Data=0x2d2d7d3e5b619c67
+[SCB] PASS #74 @ 80269000: Data=0xcebed781a48f693c
+[SCB] PASS #75 @ 80282000: Data=0xdd004e020afea0f5
+[SCB] PASS #76 @ 80295000: Data=0x5fff3767044f38c6
+[SCB] PASS #77 @ 80308000: Data=0x6e6fab99a631f62a
+[SCB] PASS #78 @ 80321000: Data=0x40f57ba60c5da84d
+[SCB] PASS #79 @ 80334000: Data=0xaff72d5cfb15e027
+[SCB] PASS #80 @ 80347000: Data=0x456cc5fa70f5230d
+[SCB] PASS #81 @ 80360000: Data=0x3a9613ea5bff4c47
+[SCB] PASS #82 @ 80373000: Data=0xf4c9fbe87e8197a0
+[SCB] PASS #83 @ 80386000: Data=0x2d55ccf48f14ff5d
+[SCB] PASS #84 @ 80399000: Data=0x06e255f99a3f3c78
+[SCB] PASS #85 @ 80412000: Data=0xec896a08eda30c33
+[SCB] PASS #86 @ 80425000: Data=0x8dde546bdfd30710
+[SCB] PASS #87 @ 80438000: Data=0xe66eaaea0fc55257
+[SCB] PASS #88 @ 80451000: Data=0x27dd4658820e0498
+[SCB] PASS #89 @ 80464000: Data=0xd524d06ee12040c2
+[SCB] PASS #90 @ 80477000: Data=0xd89d88f5d763ea21
+[SCB] PASS #91 @ 80490000: Data=0xf48aa7067da7c4cd
+[SCB] PASS #92 @ 80503000: Data=0x3d44319ce96a82da
+[SCB] PASS #93 @ 80516000: Data=0x3d9040c22cf5a2d6
+[SCB] PASS #94 @ 80529000: Data=0xdc1359e38c56280f
+[SCB] PASS #95 @ 80542000: Data=0x7a78ce88ecc8cada
+[SCB] PASS #96 @ 80555000: Data=0xe2109818d320ed23
+[SCB] PASS #97 @ 80568000: Data=0xf0169910b69c9328
+[SCB] PASS #98 @ 80581000: Data=0x65ac27b7d9ab18b7
+[SCB] PASS #99 @ 80594000: Data=0x00cd887031be2099
+[SCB] PASS #100 @ 80607000: Data=0x4dd7716ea696bb6b
+[SCB] PASS #101 @ 80620000: Data=0x2bbb750c14666cca
+[SCB] PASS #102 @ 80633000: Data=0xf7914f01771e378a
+[SCB] PASS #103 @ 80646000: Data=0xe5df787059913b68
+[SCB] PASS #104 @ 80659000: Data=0x09e0be478ddd5b5d
+[SCB] PASS #105 @ 80672000: Data=0xd76134407f4d3248
+[SCB] PASS #106 @ 80685000: Data=0x9a724a009462aa98
+[SCB] PASS #107 @ 80698000: Data=0x9efa7b4926b32a70
+[SCB] PASS #108 @ 80711000: Data=0x228c9d55ade5e706
+[SCB] PASS #109 @ 80724000: Data=0x75de046f12378260
+[SCB] PASS #110 @ 80737000: Data=0x24e1cf65f3373638
+[SCB] PASS #111 @ 80750000: Data=0x82a847f416b9fbea
+[SCB] PASS #112 @ 80763000: Data=0xd92f015121f8b8b8
+[SCB] PASS #113 @ 80776000: Data=0xcc2f1079147dd6b5
+[SCB] PASS #114 @ 80789000: Data=0xdd34e8c8c7dba769
+[SCB] PASS #115 @ 80802000: Data=0x95d75d0c183986ab
+[SCB] PASS #116 @ 80815000: Data=0xb421efba6e673bae
+[SCB] PASS #117 @ 80828000: Data=0xf56b05b03b9404ab
+[SCB] PASS #118 @ 80841000: Data=0x6e2318e17571ab7d
+[SCB] PASS #119 @ 80854000: Data=0x387ce47bf7eaacf4
+[SCB] PASS #120 @ 80867000: Data=0xf3034dec7518c76a
+[SCB] PASS #121 @ 80880000: Data=0x8f5bb83b599bca69
+[SCB] PASS #122 @ 80893000: Data=0xd91a5035213a6b3b
+[SCB] PASS #123 @ 80906000: Data=0xa6c39e0c1597536c
+[SCB] PASS #124 @ 80919000: Data=0xd7833438702cf4d9
+[SCB] PASS #125 @ 80932000: Data=0x05e032438a25b93a
+[SCB] PASS #126 @ 80945000: Data=0x1db70e612fd43669
+[WARN] wait_drain timed out after 5000 ns
+
+  ==========================================================================
+    SCOREBOARD REPORT  test_burst_streaming
+  ==========================================================================
+    Writes seen   : 126
+    Reads seen    : 126
+    Queue residual: 0  (should be 0)
+    PASSED        : 126
+    FAILED        : 0
+  --------------------------------------------------------------------------
+    RESULT >> ** PASSED **
+  ==========================================================================
+  +----------------------------------------------------------------------+
+  |  DONE:  test_burst_streaming                                 [PASS]  |
+  +----------------------------------------------------------------------+
+
+  +----------------------------------------------------------------------+
+  |  START: test_flag_behavior                                          |
+  +----------------------------------------------------------------------+
+
+  --- Full flag timing (write one at a time) ---
+  [FLAG] OK:   fifo_full after 1 writes = 0 @ 85274000
+  [FLAG] OK:   fifo_full after 2 writes = 0 @ 85716000
+  [FLAG] OK:   fifo_full after 3 writes = 0 @ 86171000
+  [FLAG] OK:   fifo_full after 4 writes = 0 @ 86613000
+  [FLAG] OK:   fifo_full after 5 writes = 0 @ 87055000
+  [FLAG] OK:   fifo_full after 6 writes = 0 @ 87497000
+  [FLAG] OK:   fifo_full after 7 writes = 0 @ 87952000
+  [FLAG] OK:   fifo_full after DEPTH writes = 1 @ 88394000
+[SCB] PASS #1 @ 88433000: Data=0x1d573764ab43cea5
+[SCB] PASS #2 @ 88446000: Data=0x16d8e7bcedca1720
+[SCB] PASS #3 @ 88459000: Data=0xe3fbb0c05b48e43d
+[SCB] PASS #4 @ 88472000: Data=0x0b1f8ad7a0c36acd
+[SCB] PASS #5 @ 88485000: Data=0xd1d9f4355f6b3c39
+[SCB] PASS #6 @ 88498000: Data=0x194a15984f7f0e41
+[SCB] PASS #7 @ 88511000: Data=0xf6db7af0f2d34420
+[SCB] PASS #8 @ 88524000: Data=0x96213e997017f2e0
+[WARN] wait_drain timed out after 5000 ns
+  --- Full flag clears after 1 read ---
+[WARN] wait_drain timed out after 5000 ns
+[SCB] PASS #9 @ 98430000: Data=0x681825e7c068362e
+  [FLAG] OK:   fifo_full after 1 read = 0 @ 98833000
+[SCB] PASS #10 @ 98872000: Data=0x29a8b946babd9be0
+[SCB] PASS #11 @ 98885000: Data=0xf8333c108c2793bc
+[SCB] PASS #12 @ 98898000: Data=0x8244c5434dc45eed
+[SCB] PASS #13 @ 98911000: Data=0xc023e956f6eae0c0
+[SCB] PASS #14 @ 98924000: Data=0x2c8ff71593df89f5
+[SCB] PASS #15 @ 98937000: Data=0x2eb7677992957907
+[SCB] PASS #16 @ 98950000: Data=0x43a20e5112364a45
+[WARN] wait_drain timed out after 5000 ns
+  --- Empty flag timing (read one at a time) ---
+[WARN] wait_drain timed out after 5000 ns
+  [FLAG] OK:   fifo_empty after 0 reads = 0 @ 108833000
+[SCB] PASS #17 @ 108869000: Data=0x7f886f9f699b8dbc
+  [FLAG] OK:   fifo_empty after 1 reads = 0 @ 109285000
+[SCB] PASS #18 @ 109324000: Data=0xab25c4c58e060444
+  [FLAG] OK:   fifo_empty after 2 reads = 0 @ 109727000
+[SCB] PASS #19 @ 109766000: Data=0x6a5398aa36b65d07
+  [FLAG] OK:   fifo_empty after 3 reads = 0 @ 110182000
+[SCB] PASS #20 @ 110221000: Data=0xec635b5b2e40097c
+  [FLAG] OK:   fifo_empty after 4 reads = 0 @ 110624000
+[SCB] PASS #21 @ 110663000: Data=0xeb35eba389ab7840
+  [FLAG] OK:   fifo_empty after 5 reads = 0 @ 111066000
+[SCB] PASS #22 @ 111105000: Data=0x2e9349156d7e02ab
+  [FLAG] OK:   fifo_empty after 6 reads = 0 @ 111521000
+[SCB] PASS #23 @ 111560000: Data=0xd370d51c6b25d337
+[SCB] PASS #24 @ 112002000: Data=0xcac6d8122d5fd88e
+  [FLAG] OK:   fifo_empty after DEPTH reads = 1 @ 112405000
+  --- Empty flag clears after 1 write ---
+  [FLAG] OK:   fifo_empty after 1 write = 0 @ 112847000
+[SCB] PASS #25 @ 112886000: Data=0xc11ab2d2bbc3f4b8
+
+  ==========================================================================
+    SCOREBOARD REPORT  test_flag_behavior
+  ==========================================================================
+    Writes seen   : 25
+    Reads seen    : 25
+    Queue residual: 0  (should be 0)
+    PASSED        : 25
+    FAILED        : 0
+  --------------------------------------------------------------------------
+    RESULT >> ** PASSED **
+  ==========================================================================
+  +----------------------------------------------------------------------+
+  |  DONE:  test_flag_behavior                                   [PASS]  |
+  +----------------------------------------------------------------------+
+
+  +----------------------------------------------------------------------+
+  |  START: test_data_integrity                                         |
+  +----------------------------------------------------------------------+
+
+  --- Writing 8 specific bit patterns ---
+  --- Reading back all 8 patterns ---
+[SCB] PASS #1 @ 113523000: Data=0x0000000000000000
+[SCB] PASS #2 @ 113536000: Data=0xffffffffffffffff
+[SCB] PASS #3 @ 113549000: Data=0xaaaaaaaaaaaaaaaa
+[SCB] PASS #4 @ 113562000: Data=0x5555555555555555
+[SCB] PASS #5 @ 113575000: Data=0x0000000000000001
+[SCB] PASS #6 @ 113588000: Data=0x8000000000000000
+[SCB] PASS #7 @ 113601000: Data=0xfffffffffffffffe
+[SCB] PASS #8 @ 113614000: Data=0x7fffffffffffffff
+[WARN] wait_drain timed out after 5000 ns
+
+  ==========================================================================
+    SCOREBOARD REPORT  test_data_integrity
+  ==========================================================================
+    Writes seen   : 8
+    Reads seen    : 8
+    Queue residual: 0  (should be 0)
+    PASSED        : 8
+    FAILED        : 0
+  --------------------------------------------------------------------------
+    RESULT >> ** PASSED **
+  ==========================================================================
+  +----------------------------------------------------------------------+
+  |  DONE:  test_data_integrity                                  [PASS]  |
+  +----------------------------------------------------------------------+
+
+  +----------------------------------------------------------------------+
+  |  START: test_overflow_underflow                                     |
+  +----------------------------------------------------------------------+
+
+  --- Single overflow attempt ---
+[WARN] wait_drain timed out after 5000 ns
+  [FLAG] OK:   fifo_full before overflow = 1 @ 123546000
+[SCB] PASS #1 @ 123598000: Data=0x210b56be7f4d6cf8
+[SCB] PASS #2 @ 123611000: Data=0x6292438823a4ac19
+[SCB] PASS #3 @ 123624000: Data=0x17ad23605678b303
+[SCB] PASS #4 @ 123637000: Data=0x94f5e15a9a68c8ae
+[SCB] PASS #5 @ 123650000: Data=0x061f6f6c3e84eb48
+[SCB] PASS #6 @ 123663000: Data=0x285ecb2b4da196f6
+[SCB] PASS #7 @ 123676000: Data=0x2a90728671db8086
+[SCB] PASS #8 @ 123689000: Data=0x675300dce2d9ef65
+[WARN] wait_drain timed out after 5000 ns
+  --- 10 back-to-back overflow writes ---
+[WARN] wait_drain timed out after 5000 ns
+[SCB] PASS #9 @ 133803000: Data=0xbc645483bb01b7ae
+[SCB] PASS #10 @ 133816000: Data=0xfd110f9049710d5a
+[SCB] PASS #11 @ 133829000: Data=0xc0051a23eee51d82
+[SCB] PASS #12 @ 133842000: Data=0x0155faaddba10472
+[SCB] PASS #13 @ 133855000: Data=0xc4fb2528475b9b76
+[SCB] PASS #14 @ 133868000: Data=0x951221f113c9975d
+[SCB] PASS #15 @ 133881000: Data=0x333a10df3bd6e487
+[SCB] PASS #16 @ 133894000: Data=0xf5d5f2fb2a6864c0
+[WARN] wait_drain timed out after 5000 ns
+  --- Single underflow attempt ---
+  [FLAG] OK:   fifo_empty before underflow = 1 @ 138766000
+[SCB] PASS #17 @ 139016000: Data=0x8b01fff24a90530a
+  --- 10 back-to-back underflow reads ---
+[SCB] PASS #18 @ 139835000: Data=0x2d407df86de87696
+
+  ==========================================================================
+    SCOREBOARD REPORT  test_overflow_underflow
+  ==========================================================================
+    Writes seen   : 18
+    Reads seen    : 18
+    Queue residual: 0  (should be 0)
+    PASSED        : 18
+    FAILED        : 0
+  --------------------------------------------------------------------------
+    RESULT >> ** PASSED **
+  ==========================================================================
+  +----------------------------------------------------------------------+
+  |  DONE:  test_overflow_underflow                              [PASS]  |
+  +----------------------------------------------------------------------+
+
+  +----------------------------------------------------------------------+
+  |  START: test_reset_scenarios                                        |
+  +----------------------------------------------------------------------+
+
+  --- Reset when empty ---
+  [FLAG] OK:   fifo_empty before reset = 1 @ 140316000
+  [FLAG] OK:   fifo_empty after reset = 1 @ 140446000
+  [FLAG] OK:   fifo_full after reset = 0 @ 140446000
+[SCB] PASS #1 @ 140550000: Data=0xa1a3663ab2dd14bc
+  --- Reset when full ---
+[WARN] wait_drain timed out after 5000 ns
+  [FLAG] OK:   fifo_full before reset = 1 @ 145901000
+  [FLAG] OK:   fifo_empty after full-reset = 1 @ 146026000
+  [FLAG] OK:   fifo_full after full-reset = 0 @ 146026000
+[SCB] PASS #1 @ 146127000: Data=0xf0e5000000000001
+  --- Reset when partially filled ---
+[WARN] wait_drain timed out after 5000 ns
+  [FLAG] OK:   fifo_empty after partial-reset = 1 @ 151596000
+[SCB] PASS #1 @ 151704000: Data=0xb9f61094577111ae
+  --- Reset during active write ---
+  [FLAG] OK:   fifo_empty after wr-during-reset = 1 @ 152126000
+[SCB] PASS #1 @ 152224000: Data=0x23ff8fd3ad2b0783
+  --- Reset during active read ---
+[WARN] wait_drain timed out after 5000 ns
+  [FLAG] OK:   fifo_empty after rd-during-reset = 1 @ 157646000
+[SCB] PASS #1 @ 157749000: Data=0xd31790e14e6edf53
+  --- Simultaneous reset + write ---
+  [FLAG] OK:   fifo_empty after simul wr+reset = 1 @ 158166000
+[SCB] PASS #1 @ 158269000: Data=0x69c0422c1b668822
+  --- Simultaneous reset + read ---
+[WARN] wait_drain timed out after 5000 ns
+  [FLAG] OK:   fifo_empty after simul rd+reset = 1 @ 163686000
+[SCB] PASS #1 @ 163794000: Data=0xe99e7c853cf91033
+
+  ==========================================================================
+    SCOREBOARD REPORT  test_reset_scenarios
+  ==========================================================================
+    Writes seen   : 1
+    Reads seen    : 1
+    Queue residual: 0  (should be 0)
+    PASSED        : 1
+    FAILED        : 0
+  --------------------------------------------------------------------------
+    RESULT >> ** PASSED **
+  ==========================================================================
+  +----------------------------------------------------------------------+
+  |  DONE:  test_reset_scenarios                                 [PASS]  |
+  +----------------------------------------------------------------------+
+
+  +----------------------------------------------------------------------+
+  |  START: test_clock_ratio                                            |
+  +----------------------------------------------------------------------+
+
+  --- Fast write (200 MHz) / Slow read (50 MHz) ---
+[SCB] PASS #1 @ 164538000: Data=0x4532341efefad24d
+[SCB] PASS #2 @ 164558000: Data=0x9f07da47cbcff406
+[SCB] PASS #3 @ 164578000: Data=0xa501119774a99911
+[SCB] PASS #4 @ 164598000: Data=0x9ee366845d6b869a
+[SCB] PASS #5 @ 164618000: Data=0x6408aaee734c8a6f
+[SCB] PASS #6 @ 164638000: Data=0xd597568e28fa907d
+[SCB] PASS #7 @ 164658000: Data=0xf33c70676e4f530d
+[SCB] PASS #8 @ 164678000: Data=0xba41bd6307ec4c54
+[WARN] wait_drain timed out after 5000 ns
+  --- Slow write (50 MHz) / Fast read (200 MHz) ---
+[SCB] PASS #1 @ 169758000: Data=0x1583b40920abe9aa
+[SCB] PASS #2 @ 169778000: Data=0x6ced41fac5e2c29c
+[SCB] PASS #3 @ 169798000: Data=0x40dcd8c280edebc0
+[SCB] PASS #4 @ 169818000: Data=0x1331d08af9f6f5d9
+[WARN] wait_drain timed out after 5000 ns
+  --- Same frequency (100 MHz both) ---
+[SCB] PASS #1 @ 174948000: Data=0x1e22b2fea7062d58
+[SCB] PASS #2 @ 174958000: Data=0x2db2ea5102367409
+[SCB] PASS #3 @ 174968000: Data=0xf48eae801997cd28
+[SCB] PASS #4 @ 174978000: Data=0xdc7edefafe04f6a6
+[SCB] PASS #5 @ 174988000: Data=0x4b6e6e58d08d3b03
+[SCB] PASS #6 @ 174998000: Data=0x0739491c5e792594
+[SCB] PASS #7 @ 175008000: Data=0x9c71f53707f4632e
+[SCB] PASS #8 @ 175018000: Data=0xdca9915d92897b14
+[WARN] wait_drain timed out after 5000 ns
+
+  ==========================================================================
+    SCOREBOARD REPORT  test_clock_ratio
+  ==========================================================================
+    Writes seen   : 8
+    Reads seen    : 8
+    Queue residual: 0  (should be 0)
+    PASSED        : 8
+    FAILED        : 0
+  --------------------------------------------------------------------------
+    RESULT >> ** PASSED **
+  ==========================================================================
+  +----------------------------------------------------------------------+
+  |  DONE:  test_clock_ratio                                     [PASS]  |
+  +----------------------------------------------------------------------+
+
+  +----------------------------------------------------------------------+
+  |  START: test_stress                                                 |
+  +----------------------------------------------------------------------+
+
+  --- Running 10 random stress scenarios ---
+    Scenario 0: type=4
+[WARN] wait_drain timed out after 5000 ns
+[SCB] PASS #1 @ 185096000: Data=0x055cdab381002f06
+[SCB] PASS #2 @ 185109000: Data=0x842cb1ef1746eb92
+[SCB] PASS #3 @ 185122000: Data=0xc591311d76eddbaa
+[SCB] PASS #4 @ 185135000: Data=0x260ca9708deaf60f
+[SCB] PASS #5 @ 185148000: Data=0xef1fd8a7dfcf085b
+[SCB] PASS #6 @ 185161000: Data=0x8095294d96343db3
+[SCB] PASS #7 @ 185174000: Data=0x03a7f1eb20b0cc97
+[SCB] PASS #8 @ 185187000: Data=0xd39aa594c1a55db5
+[WARN] wait_drain timed out after 5000 ns
+    Scenario 1: type=2
+[SCB] PASS #9 @ 190166000: Data=0xce63af5230eea01d
+[SCB] PASS #10 @ 190621000: Data=0xe3fd0a329a7c4348
+[SCB] PASS #11 @ 191050000: Data=0xa8b9a6240adc338d
+[SCB] PASS #12 @ 191505000: Data=0x198987c1a8340407
+[SCB] PASS #13 @ 191960000: Data=0x7b6eb79306eb9abf
+[SCB] PASS #14 @ 192389000: Data=0xec8d0208a4862362
+[SCB] PASS #15 @ 192831000: Data=0x1d1de79a52921a51
+[SCB] PASS #16 @ 193286000: Data=0x61b574b2ea869db9
+    Scenario 2: type=4
+[WARN] wait_drain timed out after 5000 ns
+[SCB] PASS #17 @ 198681000: Data=0x247a3a2af5e2b685
+[SCB] PASS #18 @ 198694000: Data=0x56e21f9577f9b508
+[SCB] PASS #19 @ 198707000: Data=0x068001476e13e492
+[SCB] PASS #20 @ 198720000: Data=0x833bebfd6fd1c054
+[SCB] PASS #21 @ 198733000: Data=0xff2720101d92241d
+[SCB] PASS #22 @ 198746000: Data=0xb7c28d8ce2645d47
+[SCB] PASS #23 @ 198759000: Data=0x8b4f9a25682a8799
+[SCB] PASS #24 @ 198772000: Data=0xf8f7468f09db5365
+[WARN] wait_drain timed out after 5000 ns
+    Scenario 3: type=0
+[SCB] PASS #25 @ 203751000: Data=0x72ea991c0ca58552
+[SCB] PASS #26 @ 203764000: Data=0x33b10769dee32298
+[SCB] PASS #27 @ 203777000: Data=0xd25cc43ed8e5b17b
+[SCB] PASS #28 @ 203790000: Data=0x04dc5d376412817c
+[SCB] PASS #29 @ 203803000: Data=0x32d57e736f038458
+[SCB] PASS #30 @ 203816000: Data=0xc8ca2a51edf16c55
+[SCB] PASS #31 @ 203829000: Data=0x0f28d285a1cec46c
+[SCB] PASS #32 @ 203842000: Data=0x8b8d949cc3b283dd
+[WARN] wait_drain timed out after 5000 ns
+    Scenario 4: type=2
+[SCB] PASS #33 @ 208756000: Data=0x4bde3459d56f91a3
+[SCB] PASS #34 @ 209211000: Data=0x4fe3552684288e89
+[SCB] PASS #35 @ 209640000: Data=0x45929a5aaa8d6a02
+[SCB] PASS #36 @ 210095000: Data=0x4964a225796a3cd5
+[SCB] PASS #37 @ 210550000: Data=0xd7b4d4f79339736a
+[SCB] PASS #38 @ 210979000: Data=0x6c57b7efc15603bd
+[SCB] PASS #39 @ 211421000: Data=0xf3136e9be98b7d3d
+[SCB] PASS #40 @ 211876000: Data=0xb68f1fffbae32d28
+    Scenario 5: type=1
+[WARN] wait_drain timed out after 5000 ns
+[SCB] PASS #41 @ 217258000: Data=0x4031cc19abc3bd07
+[SCB] PASS #42 @ 217271000: Data=0xb9d1b1754bd48386
+[SCB] PASS #43 @ 217284000: Data=0xc0c9f4e459f17de8
+[SCB] PASS #44 @ 217297000: Data=0x3aff6e226a5d2add
+[SCB] PASS #45 @ 217310000: Data=0x9fd674dc726eb666
+[SCB] PASS #46 @ 217323000: Data=0xff24e408cff27b7a
+[SCB] PASS #47 @ 217336000: Data=0xf1365c1785cc54bc
+[SCB] PASS #48 @ 217349000: Data=0xfd9a65929d883745
+[SCB] PASS #49 @ 217362000: Data=0x80afdcc590180ffa
+[SCB] PASS #50 @ 217375000: Data=0x6f4e880dd9d902ac
+[SCB] PASS #51 @ 217388000: Data=0x27fc00aed9ed0339
+[WARN] wait_drain timed out after 5000 ns
+    Scenario 6: type=1
+[WARN] wait_drain timed out after 5000 ns
+[SCB] PASS #52 @ 227255000: Data=0x0eb687bb028c084a
+[SCB] PASS #53 @ 227268000: Data=0xb5b817bc14838615
+[SCB] PASS #54 @ 227281000: Data=0xc36e32dac837bfca
+[SCB] PASS #55 @ 227294000: Data=0x87b773bcd76e3c18
+[SCB] PASS #56 @ 227307000: Data=0x6bb3da7b13c309d1
+[SCB] PASS #57 @ 227320000: Data=0xe91c07706aa89427
+[SCB] PASS #58 @ 227333000: Data=0xadf42b04321ca631
+[SCB] PASS #59 @ 227346000: Data=0x12961965452bc301
+[SCB] PASS #60 @ 227359000: Data=0xa159db679796bedf
+[SCB] PASS #61 @ 227372000: Data=0xa39685f2aab1b4ae
+[SCB] PASS #62 @ 227385000: Data=0xd05220c9fc836bfc
+[WARN] wait_drain timed out after 5000 ns
+    Scenario 7: type=3
+[WARN] wait_drain timed out after 5000 ns
+[SCB] PASS #63 @ 237265000: Data=0xc8e08ce71c369d71
+[SCB] PASS #64 @ 237278000: Data=0x3c9982ec889a765e
+[SCB] PASS #65 @ 237291000: Data=0xd98973dd85516335
+[SCB] PASS #66 @ 237304000: Data=0x7d5028d7b1f2d158
+[SCB] PASS #67 @ 237317000: Data=0xefd39f10754ef875
+[SCB] PASS #68 @ 237330000: Data=0x53c3c75fc09f614d
+[SCB] PASS #69 @ 237343000: Data=0x9d2d65b9c8eb69e9
+[SCB] PASS #70 @ 237356000: Data=0x99c970cffcb3d472
+[WARN] wait_drain timed out after 5000 ns
+    Scenario 8: type=0
+[SCB] PASS #71 @ 242322000: Data=0xd7ffe3609113282c
+[SCB] PASS #72 @ 242335000: Data=0xcc41c54306736acb
+[SCB] PASS #73 @ 242348000: Data=0x739276d312a880e2
+[SCB] PASS #74 @ 242361000: Data=0xc5492ea9686f7990
+[SCB] PASS #75 @ 242374000: Data=0x6056c3e93b2ad26a
+[SCB] PASS #76 @ 242387000: Data=0x9f96366b5a80ec54
+[SCB] PASS #77 @ 242400000: Data=0xb7f09597c6a6e8c8
+[SCB] PASS #78 @ 242413000: Data=0x1886ebc23fd05331
+[WARN] wait_drain timed out after 5000 ns
+    Scenario 9: type=3
+[WARN] wait_drain timed out after 5000 ns
+[SCB] PASS #79 @ 252254000: Data=0xec6cf06621e0c5fd
+[SCB] PASS #80 @ 252267000: Data=0xe036ba8355684bbe
+[SCB] PASS #81 @ 252280000: Data=0xa38edd26a350d0b9
+[SCB] PASS #82 @ 252293000: Data=0x2a5ccdc02038c619
+[SCB] PASS #83 @ 252306000: Data=0x5700a04f5a6b3b3e
+[SCB] PASS #84 @ 252319000: Data=0x708331acc56744f2
+[SCB] PASS #85 @ 252332000: Data=0x1ab48d1ca71cd8c4
+[SCB] PASS #86 @ 252345000: Data=0xfdb6d8b661fd6424
+[WARN] wait_drain timed out after 5000 ns
+
+  ==========================================================================
+    SCOREBOARD REPORT  test_stress
+  ==========================================================================
+    Writes seen   : 86
+    Reads seen    : 86
+    Queue residual: 0  (should be 0)
+    PASSED        : 86
+    FAILED        : 0
+  --------------------------------------------------------------------------
+    RESULT >> ** PASSED **
+  ==========================================================================
+  +----------------------------------------------------------------------+
+  |  DONE:  test_stress                                          [PASS]  |
+  +----------------------------------------------------------------------+
+
+
+  ########################################################################
+                         FINAL TEST SUMMARY                               
+  ########################################################################
+  #     Test Name                            Result
+  ----  -----------------------------------  ------
+  1     test_basic_rw                        PASS  
+  2     test_fill_drain_wrap                 PASS  
+  3     test_burst_streaming                 PASS  
+  4     test_flag_behavior                   PASS  
+  5     test_data_integrity                  PASS  
+  6     test_overflow_underflow              PASS  
+  7     test_reset_scenarios                 PASS  
+  8     test_clock_ratio                     PASS  
+  9     test_stress                          PASS  
+  ----------------------------------------------------------------------
+  Total: 9 tests  |  9 PASSED  |  0 FAILED
+  ----------------------------------------------------------------------
+  OVERALL RESULT  >>  ** ALL TESTS PASSED **
+  ########################################################################
+
+Simulation complete via $finish(1) at time 257226500 PS + 0
+/scratch/users/sdash/Async-FIFO-E/verif/tb/fifo_tb_top.sv:427         $finish;
+xcelium> exit
+TOOL:	xrun	24.09-s001: Exiting on Mar 17, 2026 at 11:50:33 IST  (total: 00:00:19)

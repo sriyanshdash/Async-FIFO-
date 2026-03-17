@@ -1,24 +1,153 @@
 // =============================================================================
 // File        : fifo_tb_top.sv
-// Description : Top-level testbench module for the simplified Async FIFO TB.
-//
-//               Responsibilities:
-//                 - Clock generation (wrclk, rdclk)
-//                 - DUT instantiation via interface
-//                 - Initial reset
-//                 - Test runner: creates, runs, and reports on all 9 tests
+// Description : Top-level testbench for the Async FIFO.
 //
 // Usage:
-//   Default       : runs all 9 tests
-//   +TEST_NAME=test_basic_rw : runs only the named test
+//   Default (no defines)                         : runs all 9 tests (all subparts)
+//   +define+TEST_BASIC_RW                        : runs all parts of test_basic_rw
+//   +define+TEST_BASIC_RW_SINGLE_ENTRY           : runs only Single Entry subpart
+//   +define+TEST_RESET_SCENARIOS_RESET_WHEN_FULL  : runs only Reset When Full subpart
 //
-// Available tests:
-//   test_basic_rw, test_fill_drain_wrap, test_burst_streaming,
-//   test_flag_behavior, test_data_integrity, test_overflow_underflow,
-//   test_reset_scenarios, test_clock_ratio, test_stress
+// Test-level defines:
+//   TEST_BASIC_RW, TEST_FILL_DRAIN_WRAP, TEST_BURST_STREAMING,
+//   TEST_FLAG_BEHAVIOR, TEST_DATA_INTEGRITY, TEST_OVERFLOW_UNDERFLOW,
+//   TEST_RESET_SCENARIOS, TEST_CLOCK_RATIO, TEST_STRESS
+//
+// Subpart defines (see individual test files for full list):
+//   TEST_BASIC_RW_{WRITE_READ_BACK, SINGLE_ENTRY, ALTERNATING_RW}
+//   TEST_FILL_DRAIN_WRAP_{FILL_DRAIN, POINTER_WRAP, DEPTH_BOUNDARY}
+//   TEST_BURST_STREAMING_{BURST_WRITE_READ, SIMULTANEOUS_RW, CONTINUOUS_STREAMING}
+//   TEST_FLAG_BEHAVIOR_{FULL_FLAG_TIMING, FULL_FLAG_CLEAR, EMPTY_FLAG_TIMING, EMPTY_FLAG_CLEAR}
+//   TEST_OVERFLOW_UNDERFLOW_{SINGLE_OVERFLOW, BACK_TO_BACK_OVERFLOW, SINGLE_UNDERFLOW, BACK_TO_BACK_UNDERFLOW}
+//   TEST_RESET_SCENARIOS_{RESET_WHEN_EMPTY, RESET_WHEN_FULL, RESET_PARTIAL_FILL,
+//                         RESET_DURING_WRITE, RESET_DURING_READ,
+//                         SIMULTANEOUS_RESET_WRITE, SIMULTANEOUS_RESET_READ}
+//   TEST_CLOCK_RATIO_{FAST_WRITE_SLOW_READ, SLOW_WRITE_FAST_READ, SAME_FREQUENCY}
 // =============================================================================
 
 `timescale 1ns/1ps
+
+// ---- Promote subpart defines to parent test defines ----
+
+`ifdef TEST_BASIC_RW_WRITE_READ_BACK
+    `define TEST_BASIC_RW
+`endif
+`ifdef TEST_BASIC_RW_SINGLE_ENTRY
+    `define TEST_BASIC_RW
+`endif
+`ifdef TEST_BASIC_RW_ALTERNATING_RW
+    `define TEST_BASIC_RW
+`endif
+
+`ifdef TEST_FILL_DRAIN_WRAP_FILL_DRAIN
+    `define TEST_FILL_DRAIN_WRAP
+`endif
+`ifdef TEST_FILL_DRAIN_WRAP_POINTER_WRAP
+    `define TEST_FILL_DRAIN_WRAP
+`endif
+`ifdef TEST_FILL_DRAIN_WRAP_DEPTH_BOUNDARY
+    `define TEST_FILL_DRAIN_WRAP
+`endif
+
+`ifdef TEST_BURST_STREAMING_BURST_WRITE_READ
+    `define TEST_BURST_STREAMING
+`endif
+`ifdef TEST_BURST_STREAMING_SIMULTANEOUS_RW
+    `define TEST_BURST_STREAMING
+`endif
+`ifdef TEST_BURST_STREAMING_CONTINUOUS_STREAMING
+    `define TEST_BURST_STREAMING
+`endif
+
+`ifdef TEST_FLAG_BEHAVIOR_FULL_FLAG_TIMING
+    `define TEST_FLAG_BEHAVIOR
+`endif
+`ifdef TEST_FLAG_BEHAVIOR_FULL_FLAG_CLEAR
+    `define TEST_FLAG_BEHAVIOR
+`endif
+`ifdef TEST_FLAG_BEHAVIOR_EMPTY_FLAG_TIMING
+    `define TEST_FLAG_BEHAVIOR
+`endif
+`ifdef TEST_FLAG_BEHAVIOR_EMPTY_FLAG_CLEAR
+    `define TEST_FLAG_BEHAVIOR
+`endif
+
+`ifdef TEST_OVERFLOW_UNDERFLOW_SINGLE_OVERFLOW
+    `define TEST_OVERFLOW_UNDERFLOW
+`endif
+`ifdef TEST_OVERFLOW_UNDERFLOW_BACK_TO_BACK_OVERFLOW
+    `define TEST_OVERFLOW_UNDERFLOW
+`endif
+`ifdef TEST_OVERFLOW_UNDERFLOW_SINGLE_UNDERFLOW
+    `define TEST_OVERFLOW_UNDERFLOW
+`endif
+`ifdef TEST_OVERFLOW_UNDERFLOW_BACK_TO_BACK_UNDERFLOW
+    `define TEST_OVERFLOW_UNDERFLOW
+`endif
+
+`ifdef TEST_RESET_SCENARIOS_RESET_WHEN_EMPTY
+    `define TEST_RESET_SCENARIOS
+`endif
+`ifdef TEST_RESET_SCENARIOS_RESET_WHEN_FULL
+    `define TEST_RESET_SCENARIOS
+`endif
+`ifdef TEST_RESET_SCENARIOS_RESET_PARTIAL_FILL
+    `define TEST_RESET_SCENARIOS
+`endif
+`ifdef TEST_RESET_SCENARIOS_RESET_DURING_WRITE
+    `define TEST_RESET_SCENARIOS
+`endif
+`ifdef TEST_RESET_SCENARIOS_RESET_DURING_READ
+    `define TEST_RESET_SCENARIOS
+`endif
+`ifdef TEST_RESET_SCENARIOS_SIMULTANEOUS_RESET_WRITE
+    `define TEST_RESET_SCENARIOS
+`endif
+`ifdef TEST_RESET_SCENARIOS_SIMULTANEOUS_RESET_READ
+    `define TEST_RESET_SCENARIOS
+`endif
+
+`ifdef TEST_CLOCK_RATIO_FAST_WRITE_SLOW_READ
+    `define TEST_CLOCK_RATIO
+`endif
+`ifdef TEST_CLOCK_RATIO_SLOW_WRITE_FAST_READ
+    `define TEST_CLOCK_RATIO
+`endif
+`ifdef TEST_CLOCK_RATIO_SAME_FREQUENCY
+    `define TEST_CLOCK_RATIO
+`endif
+
+// ---- If no test define is set, enable all tests ----
+
+`ifndef TEST_BASIC_RW
+`ifndef TEST_FILL_DRAIN_WRAP
+`ifndef TEST_BURST_STREAMING
+`ifndef TEST_FLAG_BEHAVIOR
+`ifndef TEST_DATA_INTEGRITY
+`ifndef TEST_OVERFLOW_UNDERFLOW
+`ifndef TEST_RESET_SCENARIOS
+`ifndef TEST_CLOCK_RATIO
+`ifndef TEST_STRESS
+    `define TEST_BASIC_RW
+    `define TEST_FILL_DRAIN_WRAP
+    `define TEST_BURST_STREAMING
+    `define TEST_FLAG_BEHAVIOR
+    `define TEST_DATA_INTEGRITY
+    `define TEST_OVERFLOW_UNDERFLOW
+    `define TEST_RESET_SCENARIOS
+    `define TEST_CLOCK_RATIO
+    `define TEST_STRESS
+`endif
+`endif
+`endif
+`endif
+`endif
+`endif
+`endif
+`endif
+`endif
+
+// ---- Includes ----
 
 `include "fifo_interface.sv"
 `include "fifo_transaction.sv"
@@ -27,15 +156,34 @@
 `include "fifo_scoreboard.sv"
 `include "fifo_env.sv"
 `include "fifo_test_base.sv"
-`include "test_basic_rw.sv"
-`include "test_fill_drain_wrap.sv"
-`include "test_burst_streaming.sv"
-`include "test_flag_behavior.sv"
-`include "test_data_integrity.sv"
-`include "test_overflow_underflow.sv"
-`include "test_reset_scenarios.sv"
-`include "test_clock_ratio.sv"
-`include "test_stress.sv"
+
+`ifdef TEST_BASIC_RW
+    `include "test_basic_rw.sv"
+`endif
+`ifdef TEST_FILL_DRAIN_WRAP
+    `include "test_fill_drain_wrap.sv"
+`endif
+`ifdef TEST_BURST_STREAMING
+    `include "test_burst_streaming.sv"
+`endif
+`ifdef TEST_FLAG_BEHAVIOR
+    `include "test_flag_behavior.sv"
+`endif
+`ifdef TEST_DATA_INTEGRITY
+    `include "test_data_integrity.sv"
+`endif
+`ifdef TEST_OVERFLOW_UNDERFLOW
+    `include "test_overflow_underflow.sv"
+`endif
+`ifdef TEST_RESET_SCENARIOS
+    `include "test_reset_scenarios.sv"
+`endif
+`ifdef TEST_CLOCK_RATIO
+    `include "test_clock_ratio.sv"
+`endif
+`ifdef TEST_STRESS
+    `include "test_stress.sv"
+`endif
 
 module fifo_tb_top;
 
@@ -102,26 +250,39 @@ module fifo_tb_top;
     //  TEST RUNNER
     // =========================================================================
 
-    // Per-test result tracking
     string test_names[$];
     string test_results[$];
 
-    // Environment (shared across all tests)
     fifo_env #(FIFO_WIDTH) env;
 
-    // --- Run one test ---
-    // Creates the test object, resets between tests, runs, and checks result.
     task run_one_test(string name);
-        // Declare one handle per test type (avoids class specialization in case)
-        test_basic_rw          #(FIFO_WIDTH, FIFO_DEPTH) t1;
-        test_fill_drain_wrap   #(FIFO_WIDTH, FIFO_DEPTH) t2;
-        test_burst_streaming   #(FIFO_WIDTH, FIFO_DEPTH) t3;
-        test_flag_behavior     #(FIFO_WIDTH, FIFO_DEPTH) t4;
-        test_data_integrity    #(FIFO_WIDTH, FIFO_DEPTH) t5;
-        test_overflow_underflow#(FIFO_WIDTH, FIFO_DEPTH) t6;
-        test_reset_scenarios   #(FIFO_WIDTH, FIFO_DEPTH) t7;
-        test_clock_ratio       #(FIFO_WIDTH, FIFO_DEPTH) t8;
-        test_stress            #(FIFO_WIDTH, FIFO_DEPTH) t9;
+        `ifdef TEST_BASIC_RW
+            test_basic_rw          #(FIFO_WIDTH, FIFO_DEPTH) t1;
+        `endif
+        `ifdef TEST_FILL_DRAIN_WRAP
+            test_fill_drain_wrap   #(FIFO_WIDTH, FIFO_DEPTH) t2;
+        `endif
+        `ifdef TEST_BURST_STREAMING
+            test_burst_streaming   #(FIFO_WIDTH, FIFO_DEPTH) t3;
+        `endif
+        `ifdef TEST_FLAG_BEHAVIOR
+            test_flag_behavior     #(FIFO_WIDTH, FIFO_DEPTH) t4;
+        `endif
+        `ifdef TEST_DATA_INTEGRITY
+            test_data_integrity    #(FIFO_WIDTH, FIFO_DEPTH) t5;
+        `endif
+        `ifdef TEST_OVERFLOW_UNDERFLOW
+            test_overflow_underflow#(FIFO_WIDTH, FIFO_DEPTH) t6;
+        `endif
+        `ifdef TEST_RESET_SCENARIOS
+            test_reset_scenarios   #(FIFO_WIDTH, FIFO_DEPTH) t7;
+        `endif
+        `ifdef TEST_CLOCK_RATIO
+            test_clock_ratio       #(FIFO_WIDTH, FIFO_DEPTH) t8;
+        `endif
+        `ifdef TEST_STRESS
+            test_stress            #(FIFO_WIDTH, FIFO_DEPTH) t9;
+        `endif
         fifo_test_base         #(FIFO_WIDTH, FIFO_DEPTH) test;
         bit found;
 
@@ -130,18 +291,35 @@ module fifo_tb_top;
         $display("  |  START: %-60s|", name);
         $display("  +----------------------------------------------------------------------+");
 
-        // Factory: create the right test object based on name
         found = 1;
-        if      (name == "test_basic_rw")           begin t1 = new(); t1.init(dut_if, env); test = t1; end
-        else if (name == "test_fill_drain_wrap")     begin t2 = new(); t2.init(dut_if, env); test = t2; end
-        else if (name == "test_burst_streaming")     begin t3 = new(); t3.init(dut_if, env); test = t3; end
-        else if (name == "test_flag_behavior")       begin t4 = new(); t4.init(dut_if, env); test = t4; end
-        else if (name == "test_data_integrity")      begin t5 = new(); t5.init(dut_if, env); test = t5; end
-        else if (name == "test_overflow_underflow")  begin t6 = new(); t6.init(dut_if, env); test = t6; end
-        else if (name == "test_reset_scenarios")     begin t7 = new(); t7.init(dut_if, env); test = t7; end
-        else if (name == "test_clock_ratio")         begin t8 = new(); t8.init(dut_if, env); test = t8; end
-        else if (name == "test_stress")              begin t9 = new(); t9.init(dut_if, env); test = t9; end
-        else                                         found = 0;
+        `ifdef TEST_BASIC_RW
+            if (name == "test_basic_rw") begin t1 = new(); t1.init(dut_if, env); test = t1; end else
+        `endif
+        `ifdef TEST_FILL_DRAIN_WRAP
+            if (name == "test_fill_drain_wrap") begin t2 = new(); t2.init(dut_if, env); test = t2; end else
+        `endif
+        `ifdef TEST_BURST_STREAMING
+            if (name == "test_burst_streaming") begin t3 = new(); t3.init(dut_if, env); test = t3; end else
+        `endif
+        `ifdef TEST_FLAG_BEHAVIOR
+            if (name == "test_flag_behavior") begin t4 = new(); t4.init(dut_if, env); test = t4; end else
+        `endif
+        `ifdef TEST_DATA_INTEGRITY
+            if (name == "test_data_integrity") begin t5 = new(); t5.init(dut_if, env); test = t5; end else
+        `endif
+        `ifdef TEST_OVERFLOW_UNDERFLOW
+            if (name == "test_overflow_underflow") begin t6 = new(); t6.init(dut_if, env); test = t6; end else
+        `endif
+        `ifdef TEST_RESET_SCENARIOS
+            if (name == "test_reset_scenarios") begin t7 = new(); t7.init(dut_if, env); test = t7; end else
+        `endif
+        `ifdef TEST_CLOCK_RATIO
+            if (name == "test_clock_ratio") begin t8 = new(); t8.init(dut_if, env); test = t8; end else
+        `endif
+        `ifdef TEST_STRESS
+            if (name == "test_stress") begin t9 = new(); t9.init(dut_if, env); test = t9; end else
+        `endif
+        found = 0;
 
         if (!found) begin
             $display("  ERROR: Unknown test '%s'", name);
@@ -150,7 +328,6 @@ module fifo_tb_top;
             return;
         end
 
-        // Reset between tests (skip for the very first one — initial reset handles it)
         if (test_names.size() > 0)
             test.reset_phase();
 
@@ -168,12 +345,9 @@ module fifo_tb_top;
         $display("  +----------------------------------------------------------------------+");
     endtask
 
-    // --- Print final summary ---
     function void print_summary();
-        int num_pass;
-        int num_fail;
-        num_pass = 0;
-        num_fail = 0;
+        int num_pass = 0;
+        int num_fail = 0;
 
         $display("");
         $display("");
@@ -201,46 +375,53 @@ module fifo_tb_top;
         $display("");
     endfunction
 
-    // --- Main execution ---
     initial begin
-        string test_name;
-        string all_tests[9];
-
-        all_tests[0] = "test_basic_rw";
-        all_tests[1] = "test_fill_drain_wrap";
-        all_tests[2] = "test_burst_streaming";
-        all_tests[3] = "test_flag_behavior";
-        all_tests[4] = "test_data_integrity";
-        all_tests[5] = "test_overflow_underflow";
-        all_tests[6] = "test_reset_scenarios";
-        all_tests[7] = "test_clock_ratio";
-        all_tests[8] = "test_stress";
+        string selected_tests[$];
 
         $display("");
         $display("  ########################################################################");
-        $display("    ASYNC FIFO - SIMPLIFIED TESTBENCH");
+        $display("    ASYNC FIFO - TESTBENCH");
         $display("    WIDTH=%0d  DEPTH=%0d", FIFO_WIDTH, FIFO_DEPTH);
         $display("  ########################################################################");
 
-        if (!$value$plusargs("TEST_NAME=%s", test_name))
-            test_name = "all";
+        `ifdef TEST_BASIC_RW
+            selected_tests.push_back("test_basic_rw");
+        `endif
+        `ifdef TEST_FILL_DRAIN_WRAP
+            selected_tests.push_back("test_fill_drain_wrap");
+        `endif
+        `ifdef TEST_BURST_STREAMING
+            selected_tests.push_back("test_burst_streaming");
+        `endif
+        `ifdef TEST_FLAG_BEHAVIOR
+            selected_tests.push_back("test_flag_behavior");
+        `endif
+        `ifdef TEST_DATA_INTEGRITY
+            selected_tests.push_back("test_data_integrity");
+        `endif
+        `ifdef TEST_OVERFLOW_UNDERFLOW
+            selected_tests.push_back("test_overflow_underflow");
+        `endif
+        `ifdef TEST_RESET_SCENARIOS
+            selected_tests.push_back("test_reset_scenarios");
+        `endif
+        `ifdef TEST_CLOCK_RATIO
+            selected_tests.push_back("test_clock_ratio");
+        `endif
+        `ifdef TEST_STRESS
+            selected_tests.push_back("test_stress");
+        `endif
 
-        // Wait for initial reset to complete
         wait (dut_if.wrst_n === 1 && dut_if.rrst_n === 1);
         @(posedge wrclk); #1;
 
-        // Create environment and start components
         env = new(dut_if);
         env.run();
 
-        $display("  Running: %s", test_name);
+        $display("  Running %0d test(s)", selected_tests.size());
 
-        if (test_name == "all") begin
-            for (int i = 0; i < 9; i++)
-                run_one_test(all_tests[i]);
-        end else begin
-            run_one_test(test_name);
-        end
+        for (int i = 0; i < selected_tests.size(); i++)
+            run_one_test(selected_tests[i]);
 
         print_summary();
         $finish;
@@ -251,7 +432,7 @@ module fifo_tb_top;
     // =========================================================================
     initial begin
         `ifdef DUMP_ON
-            $dumpfile("fifo_tb_simple.vcd");
+            $dumpfile("fifo_tb.vcd");
             $dumpvars(0, fifo_tb_top);
         `endif
     end
@@ -259,7 +440,7 @@ module fifo_tb_top;
     `ifdef DUMP_ON
         `ifdef CADENCE
             initial begin
-                $shm_open("./fifo_tb_simple.shm");
+                $shm_open("./fifo_tb.shm");
                 $shm_probe("ASM");
             end
         `endif

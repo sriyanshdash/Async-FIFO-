@@ -1,13 +1,10 @@
 // =============================================================================
 // File        : test_stress.sv
-// Description : TEST 9 - STRESS TEST
-//               Covers: randomized heavy traffic with mixed operations
+// Description : TEST 9 - STRESS TEST (randomized heavy traffic)
 // =============================================================================
 
 `ifndef TEST_STRESS_SV
 `define TEST_STRESS_SV
-
-`timescale 1ns/1ps
 
 class test_stress #(parameter FIFO_WIDTH = 64, parameter FIFO_DEPTH = 8)
     extends fifo_test_base #(FIFO_WIDTH, FIFO_DEPTH);
@@ -26,13 +23,13 @@ class test_stress #(parameter FIFO_WIDTH = 64, parameter FIFO_DEPTH = 8)
             $display("    Scenario %0d: type=%0d", s, scenario);
 
             case (scenario)
-                0: begin  // Fill and drain
+                0: begin
                     write_n(FIFO_DEPTH);
                     read_n(FIFO_DEPTH);
                     wait_drain();
                 end
 
-                1: begin  // Concurrent traffic
+                1: begin
                     write_n(FIFO_DEPTH / 2);
                     wait_drain();
                     fork
@@ -42,7 +39,7 @@ class test_stress #(parameter FIFO_WIDTH = 64, parameter FIFO_DEPTH = 8)
                     wait_drain();
                 end
 
-                2: begin  // Alternating single ops
+                2: begin
                     for (int i = 0; i < FIFO_DEPTH; i++) begin
                         write_n(1);
                         read_n(1);
@@ -50,17 +47,16 @@ class test_stress #(parameter FIFO_WIDTH = 64, parameter FIFO_DEPTH = 8)
                     end
                 end
 
-                3: begin  // Burst write then read
+                3: begin
                     write_n(FIFO_DEPTH);
                     wait_drain();
                     read_n(FIFO_DEPTH);
                     wait_drain();
                 end
 
-                4: begin  // Overflow attempt then drain
+                4: begin
                     write_n(FIFO_DEPTH);
                     wait_drain();
-                    // Overflow write (ignored by DUT)
                     @(posedge vif.wrclk); #1;
                     vif.wr_en   = 1;
                     vif.data_in = 64'h5700_5500_00E0_F100;

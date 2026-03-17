@@ -1,13 +1,10 @@
 // =============================================================================
 // File        : test_data_integrity.sv
 // Description : TEST 5 - DATA INTEGRITY PATTERNS
-//               Covers: test_data_integrity_patterns
 // =============================================================================
 
 `ifndef TEST_DATA_INTEGRITY_SV
 `define TEST_DATA_INTEGRITY_SV
-
-`timescale 1ns/1ps
 
 class test_data_integrity #(parameter FIFO_WIDTH = 64, parameter FIFO_DEPTH = 8)
     extends fifo_test_base #(FIFO_WIDTH, FIFO_DEPTH);
@@ -16,8 +13,6 @@ class test_data_integrity #(parameter FIFO_WIDTH = 64, parameter FIFO_DEPTH = 8)
     endfunction
 
     task run();
-        // Write specific bit patterns that catch common data-path bugs:
-        // stuck bits, shorted lines, bit-swap errors
         $display("\n  --- Writing 8 specific bit patterns ---");
 
         write_data(64'h0000_0000_0000_0000);  // All zeros
